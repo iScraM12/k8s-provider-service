@@ -1,0 +1,7 @@
+quarkus:
+  devservices:
+    enabled: true
+  datasource:
+    devservices:
+      image-name: mariadb
+      enabled: true

@@ -1,3 +1,65 @@
+# IDE specific
+/.idea/
+.vscode/
+
+# Created by https://www.toptal.com/developers/gitignore/api/java,maven,jboss,visualstudiocode,intellij
+# Edit at https://www.toptal.com/developers/gitignore?templates=java,maven,jboss,visualstudiocode,intellij
+
+### JBoss ###
+# Eclipse
+.project
+.settings/
+.classpath
+
+# NetBeans
+/nbproject/
+
+# Build products
+/build/
+/dist/
+/target/
+/bin/
+/tmp/
+/temp/
+
+# Deployment descriptors
+/ear-content/
+/META-INF/
+/WEB-INF/classes/
+/WEB-INF/lib/
+
+# JBoss specific
+/deploy/
+/deployments/
+/standalone/data/
+/standalone/deployments/
+/standalone/log/
+/standalone/tmp/
+/standalone/work/
+/domain/data/
+/domain/log/
+/domain/tmp/
+/domain/work/
+/configuration/standalone_xml_history/
+*.log
+*.sar
+*.esb
+*.jar
+*.war
+*.ear
+*.rar
+*.zip
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+### Java ###
 # Compiled class file
 *.class
 
@@ -22,3 +84,36 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+### Maven ###
+/target/
+.mvn/wrapper/maven-wrapper.jar
+.mvn/wrapper/maven-wrapper.properties
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# MAVEN_OPTS file
+.mvn/jvm.config
+
+# Eclipse m2e settings
+.settings/
+
+# VS Code files for ignore
+.vscode/
+
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# Local History for Visual Studio Code
+.history/
+
+# Built Visual Studio Code Extensions
+*.vsix
+
+# End of https://www.toptal.com/developers/gitignore/api/java,maven,jboss,visualstudiocode,intellij
+/.dockerignore
