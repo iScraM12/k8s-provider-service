@@ -1,3 +1,18 @@
+# Quarkus Production-Ready Configuration
+#
+# In production, datasource properties (url, username, password)
+# must be provided via environment variables or system properties.
+#
+# In development mode, the absence of these properties will automatically
+# trigger Quarkus Dev Services to start a database container.
 quarkus:
   datasource:
     db-kind: mariadb
+
+  hibernate-orm:
+    database:
+      # Validates the schema against the database on startup. This is a safe default for production.
+      generation: validate
+    log:
+      # SQL logging is disabled by default for production.
+      sql: false

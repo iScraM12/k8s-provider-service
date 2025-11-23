@@ -1,7 +1,13 @@
+# Development-specific configuration
+# This file is automatically loaded by Quarkus in 'dev' mode and overrides application.yml
+
 quarkus:
-  devservices:
-    enabled: true
-  datasource:
-    devservices:
-      image-name: mariadb
-      enabled: true
+  hibernate-orm:
+    database:
+      # In dev mode, we override the 'validate' from application.yml.
+      # This tells Hibernate to create the schema in the fresh database
+      # started by Dev Services.
+      generation: drop-and-create
+    log:
+      # We also enable SQL logging for easy debugging in dev mode.
+      sql: true
