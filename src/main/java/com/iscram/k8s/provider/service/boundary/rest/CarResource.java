@@ -9,6 +9,7 @@ import jakarta.ws.rs.core.Response;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
+import java.util.Objects;
 
 @Path("/cars")
 @Produces(MediaType.APPLICATION_JSON)
@@ -27,9 +28,14 @@ public class CarResource {
 
     @GET
     @Path("/{id}")
-    public Car getCarById(@PathParam("id") Long id) {
+    public Response getCarById(@PathParam("id") Long id) {
         log.info("Received HTTP GET request to /cars/{}", id);
-        return carService.getCarById(id);
+        Car car = carService.getCarById(id);
+        if (Objects.isNull(car)) {
+            log.warn("Car with id {} not found. Responding with HTTP 404 Not Found.", id);
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        return Response.ok(car).build();
     }
 
     @POST
