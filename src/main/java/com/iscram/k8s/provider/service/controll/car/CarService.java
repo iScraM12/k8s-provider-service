@@ -40,6 +40,18 @@ public class CarService {
                 });
     }
 
+    @Transactional
+    public boolean deleteCar(Long id) {
+        log.info("Received request to delete car with id: {}", id);
+        boolean deleted = carRepository.deleteById(id);
+        if (deleted) {
+            log.info("Successfully deleted car with id: {}", id);
+        } else {
+            log.warn("Car with id {} not found for deletion.", id);
+        }
+        return deleted;
+    }
+
     public List<Car> getAllCars() {
         log.info("Fetching all cars from the database.");
         return carRepository.listAll();
