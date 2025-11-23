@@ -10,6 +10,6 @@ CREATE TABLE IF NOT EXISTS `Car` (
 );
 
 -- Insert some sample data (optional)
--- INSERT INTO `Car` (`brand`, `model`, `color`) VALUES ('Volkswagen', 'Golf', 'Blue');
--- INSERT INTO `Car` (`brand`, `model`, `color`) VALUES ('Audi', 'A4', 'Black');
--- INSERT INTO `Car` (`brand`, `model`, `color`) VALUES ('Mercedes-Benz', 'C-Class', 'Silver');
+INSERT INTO `Car` (`brand`, `model`, `color`) VALUES ('Volkswagen', 'Golf', 'Blue');
+INSERT INTO `Car` (`brand`, `model`, `color`) VALUES ('Audi', 'A4', 'Black');
+INSERT INTO `Car` (`brand`, `model`, `color`) VALUES ('Mercedes-Benz', 'C-Class', 'Silver');

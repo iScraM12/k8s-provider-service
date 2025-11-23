@@ -83,6 +83,7 @@ Finally, run your application container, connecting it to that network:
 
 ```shell
 docker run -it --rm \
+  --name k8s-provider-service \
   --network k8s-provider-service_default \
   -p 8080:8080 \
   -e QUARKUS_PROFILE=prod \
