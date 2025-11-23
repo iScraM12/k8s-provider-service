@@ -1,89 +1,75 @@
-# code-with-quarkus
+# Car Service API
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+This project is a simple RESTful service for managing a collection of cars, built with Quarkus.
 
-If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
+It provides a full CRUD (Create, Read, Update) API for `Car` entities and is configured to run with a MariaDB database.
 
-## Running the application in dev mode
+## Core Technologies
 
-You can run your application in dev mode that enables live coding using:
+- **Quarkus**: Supersonic Subatomic Java Framework
+- **JAX-RS (REST)**: For building the REST API
+- **Hibernate ORM with Panache**: For data persistence
+- **MariaDB**: The relational database
+- **Lombok**: To reduce boilerplate code
+- **JUnit 5 & Mockito**: For unit and integration testing
 
-```shell script
-./mvnw quarkus:dev
+## API Endpoints
+
+The following endpoints are available under the base path `/cars`:
+
+- `GET /cars`: Retrieves a list of all cars.
+- `GET /cars/{id}`: Retrieves a single car by its ID.
+- `POST /cars`: Creates a new car.
+- `PUT /cars/{id}`: Updates an existing car by its ID.
+
+The API is documented via OpenAPI and can be explored through the **Swagger UI** at `/q/swagger-ui` when the application is running in dev mode.
+
+## Running the Application
+
+### Development Mode
+
+In development mode, the application uses Quarkus Dev Services to automatically start and configure a MariaDB container. No local database setup is required.
+
+To start the application in dev mode, run:
+
+```shell
+mvn quarkus:dev
 ```
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at <http://localhost:8080/q/dev/>.
+You can also use the alias `q` if you have configured it in your `.bashrc`.
 
-## Packaging and running the application
+### Production Mode
 
-The application can be packaged using:
+In production, the application is configured to connect to an external database. The database connection details must be provided at runtime.
 
-```shell script
-./mvnw package
+**1. Start the database:**
+
+Use the provided `docker-compose.yml` to start the MariaDB container:
+
+```shell
+docker-compose up -d
 ```
 
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
+**2. Run the application:**
 
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
+Build the application and run it, providing the database credentials as system properties:
 
-If you want to build an _über-jar_, execute the following command:
+```shell
+# Build the application
+mvn package
 
-```shell script
-./mvnw package -Dquarkus.package.jar.type=uber-jar
+# Run the application
+java -Dquarkus.profile=prod \
+     -Dquarkus.datasource.username=user \
+     -Dquarkus.datasource.password=password \
+     -Dquarkus.datasource.jdbc.url=jdbc:mariadb://localhost:3306/mydatabase \
+     -jar target/quarkus-app/quarkus-run.jar
 ```
 
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
+## Running Tests
 
-## Creating a native executable
+To run the full test suite (both integration and unit tests), use:
 
-You can create a native executable using:
-
-```shell script
-./mvnw package -Dnative
+```shell
+mvn test
 ```
-
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using:
-
-```shell script
-./mvnw package -Dnative -Dquarkus.native.container-build=true
-```
-
-You can then execute your native executable with: `./target/code-with-quarkus-1.0.0-SNAPSHOT-runner`
-
-If you want to learn more about building native executables, please consult <https://quarkus.io/guides/maven-tooling>.
-
-## Related Guides
-
-- REST ([guide](https://quarkus.io/guides/rest)): A Jakarta REST implementation utilizing build time processing and Vert.x. This extension is not compatible with the quarkus-resteasy extension, or any of the extensions that depend on it.
-- JNoSQL MongoDB ([guide](https://docs.quarkiverse.io/quarkus-jnosql/dev/)): Quarkus JNoSQL MongoDB Runtime provides runtime support for integrating MongoDB
-        document-oriented databases with Quarkus applications. This extension facilitates seamless integration, enabling
-        efficient storage, retrieval, and management of document-oriented data within Quarkus projects, enhancing
-        developer productivity.
-- MongoDB client ([guide](https://quarkus.io/guides/mongodb)): Connect to MongoDB in either imperative or reactive style
-- MongoDB with Panache ([guide](https://quarkus.io/guides/mongodb-panache)): Simplify your persistence code for MongoDB via the active record or the repository pattern
-- REST Jackson ([guide](https://quarkus.io/guides/rest#json-serialisation)): Jackson serialization support for Quarkus REST. This extension is not compatible with the quarkus-resteasy extension, or any of the extensions that depend on it
-- Hibernate ORM with Panache ([guide](https://quarkus.io/guides/hibernate-orm-panache)): Simplify your persistence code for Hibernate ORM via the active record or the repository pattern
-
-## Provided Code
-
-### Hibernate ORM
-
-Create your first JPA entity
-
-[Related guide section...](https://quarkus.io/guides/hibernate-orm)
-
-[Related Hibernate with Panache section...](https://quarkus.io/guides/hibernate-orm-panache)
-
-
-### Quarkus JNoSQL MongoDB Codestart
-
-Create your first Document NoSQL entity with Quarkus and JNoSQL MongoDB.
-
-[Related guide section...](https://docs.quarkiverse.io/quarkus-jnosql/dev/)
-
-### REST
-
-Easily start your REST Web Services
-
-[Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)

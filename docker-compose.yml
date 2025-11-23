@@ -5,6 +5,11 @@ services:
     image: mariadb:latest
     container_name: my-mariadb
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mariadb-admin", "ping", "-h", "localhost", "-u", "root", "--password=root_password"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     environment:
       MARIADB_ROOT_PASSWORD: 'root_password' # Required by the image
       MARIADB_DATABASE: 'mydatabase'         # As configured in application.yml
@@ -13,7 +18,10 @@ services:
     ports:
       - "3306:3306"
     volumes:
+      # Mount the data volume for persistence
       - mariadb_data:/var/lib/mysql
+      # Mount the initialization script
+      - ./init-db:/docker-entrypoint-initdb.d
 
 volumes:
   mariadb_data:

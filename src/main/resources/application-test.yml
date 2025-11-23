@@ -1,0 +1,9 @@
+# Test-specific configuration
+# This file is automatically loaded by Quarkus when running tests (e.g., via 'mvn test').
+
+quarkus:
+  hibernate-orm:
+    database:
+      # For tests, we always want to drop and re-create the schema to ensure
+      # a clean state for each test run. This overrides the 'validate' from application.yml.
+      generation: drop-and-create
