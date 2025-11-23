@@ -89,7 +89,7 @@ docker run -it --rm \
   -e QUARKUS_DATASOURCE_USERNAME=user \
   -e QUARKUS_DATASOURCE_PASSWORD=password \
   -e QUARKUS_DATASOURCE_JDBC_URL=jdbc:mariadb://mariadb:3306/mydatabase \
-  k8s-consumer-service:1.0.0-SNAPSHOT # Adjust image name and tag if necessary
+  k8s-provider-service # Adjust image name and tag if necessary
 ```
 
 ## Running Tests
